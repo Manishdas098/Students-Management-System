@@ -4,6 +4,15 @@ from  tkinter import messagebox
 import sqlite3
 
 class Student:
+    def create_database():
+        con = sqlite3.connect('stm.db')   
+        cur = con.cursor()
+        cur.execute("CREATE TABLE IF NOT EXISTS students(roll TEXT,name TEXT,email TEXT,gender TEXT, contact TEXT,dob TEXT, addres TEXT)")
+        
+        con.commit()
+        con.close()
+    
+    create_database()
     def __init__(self, root):
         self.root = root
         self.root.title("Student Inventory Management System | Created by Manish")
@@ -149,24 +158,28 @@ class Student:
         self.Students_Table['show']='headings'
         self.Students_Table.pack()
         self.fetch_data()
-        
+    
+    
         
     def add_Student(self ) :
        
            con = sqlite3.connect('stm.db')
            
            cur = con.cursor()
-              
-           cur.execute("INSERT INTO students (roll,name,email,gender,contact,dob,addres) VALUES (? , ? , ? , ?,?,?,?)",
+           if self.Roll_no_var.get() == "" or self.Name_var.get()=="" or self.Email_var.get()=="" or self.gender_var.get()=="" or self.contract_var.get()=="" or self.dob_var.get()=="":
+               messagebox.showerror("error" , "please enter all the fields")
+           else:  
+                cur.execute("INSERT INTO students (roll,name,email,gender,contact,dob,addres) VALUES (? , ? , ? , ?,?,?,?)",
                        ((self.Roll_no_var.get(), self.Name_var.get(), self.Email_var.get() , self.gender_var.get(), self.contract_var.get() , self.dob_var.get(), self.txt_address.get()  )))
       
            
                 
-           con.commit()
-           self.fetch_data()
-           self.clear()
-           con.close()
-           messagebox.showinfo("Success" ,"Record has been successfully added")
+                con.commit()
+                self.fetch_data()
+                self.clear()
+                messagebox.showinfo("Success" ,"Record has been successfully added")
+                con.close()
+           
        
     def  fetch_data(self):
         con = sqlite3.connect('stm.db')
@@ -204,22 +217,26 @@ class Student:
         self.txt_address.set(row[6])
         
     def update_data(self):
-        con = sqlite3.connect('stm.db')
-        cur = con.cursor()
-        cur.execute("update students set name=?, email=?, gender=? , contact=? , dob=? , addres= ? WHERE roll = ?",( 
-        self.Name_var.get(),     
-        self.Email_var.get(), 
-        self.gender_var.get(),
-        self.contract_var.get(),
-        self.dob_var.get(), 
-        self.txt_address.get(), 
-        self.Roll_no_var.get()   
+     if self.Roll_no_var.get() == "" or self.Name_var.get()=="" or self.Email_var.get()=="" or self.gender_var.get()=="" or self.contract_var.get()=="" or self.dob_var.get()=="":
+               messagebox.showerror("error" , "please enter")
+     else: 
+       con = sqlite3.connect('stm.db')
+       cur = con.cursor()
+       
+       cur.execute("update students set name=?, email=?, gender=? , contact=? , dob=? , addres= ? WHERE roll = ?",( 
+       self.Name_var.get(),     
+       self.Email_var.get(), 
+       self.gender_var.get(),
+       self.contract_var.get(),
+       self.dob_var.get(), 
+       self.txt_address.get(), 
+       self.Roll_no_var.get()   
         ))                                                                                   
 
-        con.commit()
-        self.fetch_data()
-        con.close()
-        messagebox.showinfo("Success" ,"Record has been successfully updated")    
+       con.commit()
+       self.fetch_data()
+       con.close()
+       messagebox.showinfo("Success" ,"Record has been successfully updated")    
     def  Delete_data(self):
         con = sqlite3.connect('stm.db')
         cur = con.cursor()
@@ -231,8 +248,8 @@ class Student:
       
         con.commit()
         con.close()
-        self.fetch_data()
         self.clear()
+        self.fetch_data()
         
            
     def  search_data(self):
