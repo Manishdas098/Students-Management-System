@@ -29,7 +29,7 @@ class Student:
         self.root.title("Student Inventory Management System | Created by Manish")
         self.root.geometry("1350x700+0+0")
         root.configure(bg='#FFFFFF')      
-        root.iconbitmap("Q:\jarvis\management system\manager.ico")
+        root.iconbitmap("manager.ico")
         title = Label(self.root , text="Students Management System" ,bd=10 , relief=GROOVE, font=("Times new roman",50,"bold"), bg="#6200ee", fg="white")
         title.pack(side=TOP, fill = X)
 #=======================================================All variable ==========================================================#
