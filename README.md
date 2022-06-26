@@ -11,3 +11,8 @@ Preview
 Preview with QR-Code
 
 ![Screenshot (134)](https://user-images.githubusercontent.com/92661896/175781029-f0c1c8ab-1d04-403a-9b9f-db9f9f1fa8be.png)
+
+it also save in Students_QR 
+
+![Roll-no 1](https://user-images.githubusercontent.com/92661896/175816237-970316c0-69c3-4e41-ad33-aa06d6eae3e3.png)
+
